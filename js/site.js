@@ -146,7 +146,7 @@ if ($("#proj")) {
 
     $("#p-repo").innerHTML = p.repo
       ? `<a href="${p.repo}" target="_blank" rel="noopener">View on GitHub &rarr;</a>`
-      : "Repository kept private under university coursework policy. Happy to walk through the code on request.";
+      : esc(p.repoNote || "Repository kept private under university coursework policy. Happy to walk through the code on request.");
 
     const links = [];
     if (p.repo) links.push(`<a class="btn btn-solid" href="${p.repo}" target="_blank" rel="noopener">GitHub</a>`);

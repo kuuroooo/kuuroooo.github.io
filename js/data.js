@@ -103,7 +103,8 @@ const PROJECTS = [
     featured: false,
     tags: ["TypeScript", "React Native", "Expo", "Supabase", "CI/CD"],
     blurb: "An Expo and React Native app in early development. Auth, Supabase and the CI pipeline are in; the recipe features are next.",
-    repo: "https://github.com/kuuroooo/kellysCookbook",
+    repo: null,   // private on GitHub; set the URL here if you make it public
+    repoNote: "The repository is private while the app is still taking shape. Happy to share access on request.",
     demo: null,
     cover: null,   // TODO: app screenshot or device mockup, 1600x1000
     role: "Solo. Design, build and infrastructure. Ongoing.",
