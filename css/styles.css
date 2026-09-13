@@ -1,0 +1,421 @@
+@import url("fonts.css");
+
+/* ── Palette ────────────────────────────────────────────────────────────
+   One accent, used identically everywhere (colour consistency lock).
+   Every value here is verified to WCAG AA as text and as a button fill.
+   Page theme is locked to light: no section inverts. */
+
+:root {
+  --bg:        #FFFFFF;
+  --bg-alt:    #FBF6F8;
+  --bg-sunk:   #F6ECF0;
+  --accent:    #B14E6A;
+  --accent-hi: #93384F;
+  --accent-sm: #F2BED1;
+  --accent-wash:#FDF2F6;
+  --text:      #322329;
+  --muted:     #7E6470;
+  --border:    #EFD8E1;
+  --shadow:    0 24px 60px -34px rgba(177,78,106,.36);
+}
+
+:root {
+  --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Shape lock. Documented rule, applied everywhere:
+     interactive controls are full pill, containers are 14px. Nothing else. */
+  --r-control: 999px;
+  --r-box:     14px;
+
+  --max: 1180px;
+  --gut: clamp(1.25rem, 5vw, 4rem);
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--accent-sm); color: var(--text); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gut); }
+
+/* ── Nav (single line, 68px) ───────────────────────────────────────── */
+
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding-inline: var(--gut);
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease);
+}
+
+.nav-mark { font-family: var(--mono); font-size: .95rem; font-weight: 500; letter-spacing: .04em; color: var(--accent); }
+
+.nav-links { display: flex; align-items: center; gap: 1.6rem; }
+.nav-links a { font-size: .88rem; color: var(--muted); transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+
+.nav-cv {
+  font-size: .82rem; border: 1px solid var(--accent); color: var(--accent);
+  padding: .48rem 1.05rem; border-radius: var(--r-control);
+  transition: background .2s, color .2s;
+}
+.nav-cv:hover { background: var(--accent); color: #fff; }
+
+.nav-burger { display: none; background: none; border: 0; cursor: pointer; padding: .4rem; }
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--text); margin: 5px 0; transition: transform .3s var(--ease), opacity .2s; }
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 860px) {
+  .nav-burger { display: block; }
+  .nav-links {
+    position: fixed; inset: 0 0 0 32%;
+    flex-direction: column; justify-content: center; gap: 1.75rem;
+    background: var(--bg-alt); border-left: 1px solid var(--border);
+    transform: translateX(100%); transition: transform .35s var(--ease);
+  }
+  .nav-links.open { transform: none; }
+  .nav-links a { font-size: 1.05rem; }
+  .nav-cv { order: 9; }
+}
+
+/* ── Hero: split, left copy / right portrait. Top padding capped at 6rem ── */
+
+.hero { min-height: 100svh; display: flex; align-items: center; padding-block: 6rem 3rem; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; width: 100%; }
+
+.hero h1 {
+  font-size: clamp(3rem, 9vw, 5.75rem);
+  font-weight: 600; line-height: 1.02; letter-spacing: -.035em;
+  margin-bottom: 1.25rem;
+}
+.cursor { color: var(--accent); font-weight: 300; animation: blink 1.05s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero p { max-width: 34ch; color: var(--muted); font-size: 1.125rem; line-height: 1.55; margin-bottom: 2.25rem; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
+  font-size: .9rem; font-weight: 500; padding: .8rem 1.5rem;
+  border-radius: var(--r-control); border: 1px solid var(--accent); color: var(--accent);
+  transition: background .22s, color .22s, border-color .22s, transform .12s var(--ease);
+}
+.btn:hover { background: var(--accent-wash); }
+.btn:active { transform: translateY(1px); }
+.btn-solid { background: var(--accent); color: #fff; }
+.btn-solid:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+
+.hero-portrait { position: relative; }
+.hero-portrait img, .hero-portrait .ph {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--r-box);
+}
+.hero-portrait::after {
+  content: ""; position: absolute; inset: 16px -16px -16px 16px;
+  border: 1px solid var(--accent-sm); border-radius: var(--r-box); z-index: -1;
+}
+.ph {
+  display: grid; place-items: center; background: var(--bg-sunk);
+  color: var(--muted); font-family: var(--mono); font-size: .75rem;
+  text-align: center; padding: 1rem; line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-portrait { max-width: 17rem; }
+  .hero-portrait::after { inset: 12px -12px -12px 12px; }
+}
+
+/* ── Sections. No numbering, no eyebrows. ─────────────────────────── */
+
+section { padding-block: clamp(4rem, 9vw, 7rem); }
+.alt { background: var(--bg-alt); }
+
+h2 {
+  font-size: clamp(1.9rem, 4.5vw, 2.85rem);
+  font-weight: 600; letter-spacing: -.03em; line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+
+/* ── About ─────────────────────────────────────────────────────────── */
+
+.about { display: grid; grid-template-columns: minmax(0,1fr) 15rem; gap: clamp(2rem,6vw,5rem); align-items: start; }
+.about p { color: var(--muted); margin-bottom: 1.1rem; max-width: 65ch; }
+
+.langs { display: grid; gap: 1.4rem; }
+.langs h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip {
+  font-size: .82rem; color: var(--muted);
+  border: 1px solid var(--border); border-radius: var(--r-control);
+  padding: .28rem .75rem; background: var(--bg);
+}
+
+/* ── Experience ────────────────────────────────────────────────────── */
+
+.jobs { display: grid; gap: 3rem; }
+.job { display: grid; grid-template-columns: 11rem minmax(0,1fr); gap: clamp(1rem,4vw,3rem); }
+.job-when { font-family: var(--mono); font-size: .8rem; color: var(--accent); padding-top: .4rem; }
+.job h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -.015em; }
+.job h3 .at { color: var(--accent); }
+.job .place { font-size: .85rem; color: var(--muted); margin-top: .15rem; }
+.job .blurb { color: var(--muted); font-size: .95rem; margin: .85rem 0 1.1rem; max-width: 62ch; }
+.job ul { list-style: none; display: grid; gap: .65rem; }
+.job li { position: relative; padding-left: 1.25rem; color: var(--muted); font-size: .95rem; max-width: 68ch; }
+.job li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 1px; background: var(--accent); }
+
+@media (max-width: 740px) { .job { grid-template-columns: 1fr; gap: .4rem; } }
+
+/* ── Projects ──────────────────────────────────────────────────────── */
+
+.filters { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 2rem; }
+.filters button {
+  font-size: .82rem; padding: .4rem 1rem; border-radius: var(--r-control); cursor: pointer;
+  border: 1px solid var(--border); background: transparent; color: var(--muted);
+  font-family: inherit; transition: all .2s;
+}
+.filters button:hover { border-color: var(--accent-sm); color: var(--text); }
+.filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(19.5rem,1fr)); gap: 1.5rem; }
+
+.card {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-box);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+}
+.card:hover { transform: translateY(-4px); border-color: var(--accent-sm); box-shadow: var(--shadow); }
+.card.hide { display: none; }
+
+.card-cover { aspect-ratio: 16/10; border-bottom: 1px solid var(--border); background: var(--bg-sunk); }
+.card-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Coverless cards get a hairline of accent instead of an empty image panel. */
+.card:not(:has(.card-cover)) .card-body { border-top: 2px solid var(--accent-sm); }
+
+.card-body { padding: 1.25rem 1.35rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+.card h3 { font-size: 1.1rem; font-weight: 600; letter-spacing: -.02em; }
+.card .meta { font-size: .8rem; color: var(--muted); margin: .2rem 0 .65rem; flex: 0 0 auto; }
+.card .blurb { color: var(--muted); font-size: .9rem; line-height: 1.55; flex: 1; }
+.card-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+.tag {
+  font-size: .74rem; color: var(--muted); background: var(--accent-wash);
+  border: 1px solid var(--border); padding: .2rem .6rem; border-radius: var(--r-control);
+}
+.card-more { font-size: .85rem; color: var(--accent); margin-top: 1rem; display: inline-flex; gap: .4rem; align-items: center; }
+.card:hover .card-more .arr { transform: translateX(4px); }
+.card-more .arr { transition: transform .25s var(--ease); }
+
+/* ── Skills ────────────────────────────────────────────────────────── */
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem,1fr)); gap: 2rem 3rem; }
+.skills h3 { font-size: .95rem; font-weight: 600; margin-bottom: .8rem; }
+.skills .chips { gap: .4rem; }
+
+/* ── Education. Sparse dividers, not a hairline per row. ──────────── */
+
+.edu { display: grid; gap: 1.5rem; max-width: 46rem; }
+.edu-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1rem; align-items: baseline; }
+.edu-row + .edu-row { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.edu-row h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.015em; }
+.edu-row .deg { color: var(--muted); font-size: .92rem; }
+.edu-row .note { color: var(--accent); font-size: .88rem; }
+.edu-row .when { font-family: var(--mono); font-size: .8rem; color: var(--muted); white-space: nowrap; }
+
+/* ── Contact ───────────────────────────────────────────────────────── */
+
+.contact h2 { max-width: 18ch; }
+.contact p { max-width: 48ch; color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+
+footer { padding: 2.25rem 0 2.75rem; border-top: 1px solid var(--border); }
+footer .row { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; justify-content: space-between; }
+footer p, footer a { font-size: .85rem; color: var(--muted); }
+footer a:hover { color: var(--accent); }
+footer nav { display: flex; gap: 1.5rem; }
+
+/* ── Project detail page ───────────────────────────────────────────── */
+
+.back { font-size: .88rem; color: var(--accent); display: inline-flex; gap: .5rem; align-items: center; margin-bottom: 2.25rem; }
+.back:hover .arr { transform: translateX(-4px); }
+.back .arr { transition: transform .25s var(--ease); }
+
+.p-hero { padding-block: 8rem 2.5rem; }
+.p-title { font-size: clamp(2.25rem, 6.5vw, 4rem); font-weight: 600; line-height: 1.04; letter-spacing: -.035em; margin-bottom: .75rem; }
+.p-meta { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; font-size: .9rem; color: var(--muted); margin-bottom: 1.75rem; }
+.p-cover { aspect-ratio: 21/9; border: 1px solid var(--border); border-radius: var(--r-box); overflow: hidden; margin-bottom: 3rem; }
+.p-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+.p-body { display: grid; grid-template-columns: minmax(0,1fr) 16rem; gap: clamp(2rem,6vw,4.5rem); align-items: start; }
+.p-body h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+.p-body h2:first-child { margin-top: 0; }
+.p-body p { color: var(--muted); margin-bottom: 1rem; max-width: 65ch; }
+.p-body ul { list-style: none; display: grid; gap: .75rem; }
+.p-body ul li { position: relative; padding-left: 1.25rem; color: var(--muted); max-width: 68ch; }
+.p-body ul li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 1px; background: var(--accent); }
+
+.pull { border-left: 2px solid var(--accent); padding: .2rem 0 .2rem 1.35rem; margin-top: 2.5rem; font-size: 1.15rem; line-height: 1.5; color: var(--text); max-width: 56ch; }
+
+.side { position: sticky; top: 6.5rem; display: grid; gap: 1.75rem; }
+.side h3 { font-size: .95rem; font-weight: 600; margin-bottom: .7rem; }
+.side .note { font-size: .88rem; color: var(--muted); line-height: 1.55; }
+.side .note a { color: var(--accent); }
+
+.p-next { border-top: 1px solid var(--border); margin-top: 4.5rem; padding-top: 2rem; display: flex; justify-content: space-between; gap: 1rem; font-size: .88rem; }
+.p-next a { color: var(--accent); }
+
+@media (max-width: 820px) {
+  .about { grid-template-columns: 1fr; }
+  .p-body { grid-template-columns: 1fr; }
+  .side { position: static; }
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────
+   CSS scroll-driven animation, not a scroll listener and not an observer.
+   The hidden start state lives inside @supports, so any browser without
+   scroll-driven animations simply shows the content. Content is never
+   able to get stuck invisible. */
+
+@supports (animation-timeline: scroll()) {
+  /* Nav hairline fades in as the page leaves the top. */
+  .nav {
+    animation: navline linear both;
+    animation-timeline: scroll();
+    animation-range: 0 72px;
+  }
+  @keyframes navline {
+    from { border-bottom-color: transparent; }
+    to   { border-bottom-color: var(--border); }
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Editorial Manifesto hero and Sticky-Stack case studies ─────────── */
+
+:root { --nav-h: 68px; }
+
+/* ── Editorial manifesto hero ──────────────────────────────────────────
+   No asset by design. Section 10 names this paradigm as type-led and
+   poster-like, which is also the honest answer to having no project imagery. */
+
+.m-hero {
+  min-height: 100svh;
+  display: flex; align-items: center;
+  padding-block: 6rem 3rem;
+}
+.m-hero .wrap { width: 100%; }
+
+.m-who {
+  font-size: 1.15rem; font-weight: 500; color: var(--muted);
+  margin-bottom: clamp(1.5rem, 4vw, 2.75rem);
+}
+.m-who strong { color: var(--text); font-weight: 600; }
+
+.m-claim {
+  font-size: clamp(2.9rem, 8.2vw, 6.5rem);
+  font-weight: 600; line-height: .98; letter-spacing: -.04em;
+  max-width: 15ch;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+.m-claim .soft { color: var(--muted); }
+
+.m-sub {
+  font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--muted);
+  max-width: 52ch; line-height: 1.55;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Sticky-stack case studies ─────────────────────────────────────────
+   Motivated (Section 5): each featured project gets the full viewport for
+   one moment, and the previous one is physically pushed under it. That is
+   hierarchy, not decoration. Pure CSS sticky, no library, no scroll handler. */
+
+.stack { position: relative; }
+
+.stack-panel {
+  position: sticky; top: var(--nav-h);
+  min-height: calc(100svh - var(--nav-h));
+  display: flex; align-items: center;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -16px 44px -34px rgba(0,0,0,.35);
+}
+.stack-panel:nth-child(even) { background: var(--bg-alt); }
+
+.panel-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: clamp(2rem,5vw,4.5rem); align-items: start; width: 100%; }
+
+.panel-title { font-size: clamp(2rem, 4.8vw, 3.4rem); font-weight: 600; letter-spacing: -.035em; line-height: 1.04; }
+.panel-meta { font-size: .9rem; color: var(--muted); margin: .6rem 0 1.4rem; }
+.panel-lede { color: var(--muted); font-size: 1.05rem; line-height: 1.6; max-width: 56ch; margin-bottom: 1.75rem; }
+.panel-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+.panel-points { list-style: none; display: grid; gap: .8rem; margin-bottom: 1.75rem; }
+.panel-points li { position: relative; padding-left: 1.3rem; color: var(--muted); font-size: .95rem; max-width: 62ch; }
+.panel-points li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 1px; background: var(--accent); }
+
+@media (max-width: 900px) {
+  .panel-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .stack-panel { position: static; min-height: 0; box-shadow: none; }
+}
+
+/* ── Compact list for the coursework projects ──────────────────────────
+   Five items, so a list is the right component. One divider style, between
+   rows only, never top and bottom on every row. */
+
+.minor { list-style: none; display: grid; max-width: 58rem; }
+.minor li + li { border-top: 1px solid var(--border); }
+.minor a {
+  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: .35rem 1.5rem;
+  align-items: baseline; padding: 1.35rem 0;
+  transition: padding-left .25s var(--ease);
+}
+.minor a:hover { padding-left: .6rem; }
+.minor .t { font-size: 1.05rem; font-weight: 600; letter-spacing: -.015em; }
+.minor a:hover .t { color: var(--accent); }
+.minor .c { grid-column: 1; font-size: .88rem; color: var(--muted); }
+.minor .k { grid-row: 1 / span 2; font-size: .8rem; color: var(--muted); font-family: var(--mono); white-space: nowrap; }
+
+@media (max-width: 620px) {
+  .minor a { grid-template-columns: 1fr; }
+  .minor .k { grid-row: auto; }
+}

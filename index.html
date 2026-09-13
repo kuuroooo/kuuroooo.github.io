@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kelly Wang | Software Engineer</title>
+<meta name="description" content="Kelly Cheng Jie Wang, software engineer in Amsterdam. Scala, GraphQL, React and React Native." />
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-mark">KW</a>
+  <button class="nav-burger" id="burger" aria-expanded="false" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navlinks">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-cv" href="assets/KellyWang_CV.pdf" target="_blank" rel="noopener">Resume</a>
+  </div>
+</nav>
+
+<header class="m-hero" id="top">
+  <div class="wrap">
+    <p class="m-who"><strong>Kelly Wang</strong>, software engineer in Amsterdam</p>
+    <h1 class="m-claim">Root cause, <span class="soft">not symptom.</span></h1>
+    <p class="m-sub" id="intro" data-copy="introAlt"></p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#work">View work</a>
+      <a class="btn" href="assets/KellyWang_CV.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <h2 class="reveal">About</h2>
+      <div class="about">
+        <div class="reveal" id="abouttext"></div>
+        <div class="reveal">
+          <div class="hero-portrait" id="portrait"></div>
+          <div class="langs reveal" id="langs" style="margin-top:2.5rem"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="alt">
+    <div class="wrap">
+      <h2 class="reveal">Experience</h2>
+      <div class="jobs" id="jobs"></div>
+    </div>
+  </section>
+
+  <section id="work" style="padding-bottom:0">
+    <div class="wrap"><h2 class="reveal">Selected work</h2></div>
+  </section>
+  <div class="stack" id="stack"></div>
+
+  <section id="more">
+    <div class="wrap">
+      <h2 class="reveal">Also built</h2>
+      <ul class="minor reveal" id="minor"></ul>
+    </div>
+  </section>
+
+  <section id="skills" class="alt">
+    <div class="wrap">
+      <h2 class="reveal">Skills</h2>
+      <div class="skills reveal" id="skillgrid"></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2 class="reveal">Education</h2>
+      <div class="edu reveal" id="edu"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="alt">
+    <div class="wrap">
+      <h2 class="reveal">Get in touch</h2>
+      <p class="reveal">I am open to collaborating on side projects, research and open source, or just talking shop about Scala, testing, or making bugs stay fixed. My inbox is open.</p>
+      <div class="hero-actions reveal" id="contactactions"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <p>Designed and built by Kelly Wang</p>
+    <nav id="footlinks"></nav>
+  </div>
+</footer>
+
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

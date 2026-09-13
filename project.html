@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Project | Kelly Wang</title>
+<meta name="description" content="Project detail. Kelly Cheng Jie Wang, software engineer in Amsterdam." />
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-mark">KW</a>
+  <button class="nav-burger" id="burger" aria-expanded="false" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navlinks">
+    <a href="index.html#about">About</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#contact">Contact</a>
+    <a class="nav-cv" href="assets/KellyWang_CV.pdf" target="_blank" rel="noopener">Resume</a>
+  </div>
+</nav>
+
+<main class="wrap" id="proj">
+  <div class="p-hero">
+    <a class="back" href="index.html#projects"><span class="arr">&larr;</span> All projects</a>
+    <h1 class="p-title" id="p-title"></h1>
+    <div class="p-meta" id="p-meta"></div>
+    <div class="hero-actions" id="p-links" style="margin-bottom:2.5rem"></div>
+  </div>
+
+  <div class="p-cover" id="p-cover"></div>
+
+  <div class="p-body">
+    <div>
+      <h2>Overview</h2>
+      <div id="p-overview"></div>
+      <h2>What I built</h2>
+      <ul id="p-highlights"></ul>
+      <p class="pull" id="p-takeaway" hidden></p>
+    </div>
+    <aside class="side">
+      <div>
+        <h3>Stack</h3>
+        <div class="chips" id="p-stack"></div>
+      </div>
+      <div>
+        <h3>Role</h3>
+        <p class="note" id="p-role"></p>
+      </div>
+      <div>
+        <h3>Code</h3>
+        <p class="note" id="p-repo"></p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="p-next" id="p-next"></div>
+</main>
+
+<footer style="margin-top:4.5rem">
+  <div class="wrap row">
+    <p>Designed and built by Kelly Wang</p>
+    <nav id="footlinks"></nav>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
