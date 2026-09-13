@@ -19,7 +19,7 @@ const PROFILE = {
 
   about: [
     "I have two years of production delivery behind me, earned while completing an MSc in Computer Science at VU Amsterdam and the University of Amsterdam (8/10, July 2026).",
-    "At Setso I work across a Scala and GraphQL backend, a React web app and a React Native client. Six repositories, containerised services on Terraform-provisioned infrastructure, live at ten production companies. I like owning a change all the way from schema and resolvers through to the UI, and I like finding out why something actually broke.",
+    "At Setso I work across a Scala and GraphQL backend, a React web app and a React Native client. Six repositories, containerised services, live at ten production companies. I like owning a change all the way from schema and resolvers through to the UI, and I like finding out why something actually broke.",
     "My thesis went the other direction: multi-agent reinforcement learning for safer conversational AI, LoRA adapters over a frozen Llama-3-8B across four GPUs. It returned a null result, and I reported it as one."
   ],
 
@@ -27,8 +27,8 @@ const PROFILE = {
 
   skills: {
     "Languages": ["TypeScript", "JavaScript", "Scala", "Python", "SQL", "Java", "C++"],
-    "Frontend": ["React", "React Native", "Expo", "Vitest", "Maestro"],
-    "Backend and infrastructure": ["Scala / JVM", "GraphQL", "Terraform", "Docker", "FastAPI", "Elasticsearch", "PostgreSQL"],
+    "Frontend": ["React", "React Native", "Expo", "Vitest"],
+    "Backend and infrastructure": ["Scala / JVM", "GraphQL", "Docker", "FastAPI", "Elasticsearch", "PostgreSQL"],
     "Delivery": ["CI/CD", "PR review", "Automated testing", "Agile", "Linear"],
     "Machine learning": ["PyTorch", "Multi-GPU training", "LoRA fine-tuning", "LLM evaluation"]
   }
@@ -41,13 +41,13 @@ const EXPERIENCE = [
     orgUrl: "",
     place: "Amsterdam",
     period: "Sep 2024 - Present",
-    blurb: "Production-management software for film and TV, live at 10 production companies. Seven-person team, six-repository polyglot microservice architecture.",
+    blurb: "Production-management software for film and TV, live at 10 production companies. Six-repository polyglot microservice architecture.",
     points: [
       "Shipped 34 features and 90 improvements across the Scala and GraphQL API, React web app and React Native client, owning 9 end to end from schema and resolvers through to UI, including one change spanning four repositories.",
-      "Cut p90 production bug resolution time by 39%, from 26 days to 16, by closing 157 defects (30% of every bug the team resolved) and fixing each at root cause rather than at the reported symptom.",
-      "Raised automated test coverage 5.3x, from 615 to 3,271 cases, and grew CI/CD from 2 workflows to 50: pull-request gates, Maestro mobile E2E suites, one-click rollback deploys.",
-      "Merged 441 of 469 pull requests opened (94%) across six repositories in 16 months, at a median of 108 lines and 20 hours to merge.",
-      "Reviewed 234 pull requests spanning 217,000 lines across seven repositories, requesting changes on 30%, including Go services outside my primary stack."
+      "Cut the 90th-percentile time to close my own bugs 41%, from 26 days to 15 (Jun 2025-Jan 2026 against Feb-Sep 2026), by closing 157 defects (30% of the 518 the team resolved) at root cause across the Scala, TypeScript and React services rather than at the reported symptom.",
+      "Wrote 61 automated test files covering 372 test cases across the Scala, TypeScript and React services, run on every pull request through the team's CI pipeline.",
+      "Merged 442 pull requests across six repositories at a 94% merge rate, at a median of 108 lines and 20 hours to merge, sustaining daily delivery throughout the MSc.",
+      "Reviewed 235 pull requests from 6 engineers across seven repositories, requesting changes on 30%, including a Go authentication service outside my primary stack."
     ]
   },
   {
